@@ -132,11 +132,17 @@ text-align: right;color: #777;}
   border-radius: 3px;
   overflow: hidden;
   position: static;
+  @media screen and (max-width:768px) {
+      width: auto;
+      height: auto;
+      padding: 0 16px;}
   // background-color: rgba(231, 231, 220, 0.5);
   background: linear-gradient(
     315deg,
     rgba(138, 179, 220, 0.7) 38%,
     rgba(48, 238, 226, 0.7) 68%,
+
+    
 
   );
   &:hover,
@@ -157,6 +163,11 @@ text-align: right;color: #777;}
   overflow: hidden;
   // &:hover,
   // &:focus {overflow:hidden;z-index: 99;border: 1px solid red;}
+@media screen and (max-width:768px) {
+      width: auto;
+      height: auto;
+      // padding: 16px 16px;
+  }
 }
 
 

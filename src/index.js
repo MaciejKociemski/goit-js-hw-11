@@ -3,6 +3,9 @@ import NewsApiService from './js/api-service';
 import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+
+
+
 const refs = {
   searchForm: document.querySelector('.search-form'),
   galleryContainer: document.querySelector('.gallery'),
@@ -82,8 +85,7 @@ function onRenderGallery(elements) {
         views,
         comments,
         downloads,
-      }) => {
-        return `<div class="photo-card">
+      }) => { return `<div class="photo-card">
     <a href="${largeImageURL}">
       <img class="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
     </a>

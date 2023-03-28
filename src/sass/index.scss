@@ -14,6 +14,7 @@ ul {
 }
 
 img {
+
   display: block;
   max-width: 100%;
   height: auto;
@@ -36,8 +37,10 @@ p {
 
 
 .search-form {
-  top: 0;
+  position:fixed;
+  // top: 0;
   left: 0;
+  top:18px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -56,13 +59,14 @@ p {
 
 .searchInput {
   width: 300px;
-  height: 30px;
+  height: 40px;
   padding: 5px 5px 5px 15px;
   font-size: 16px;
   outline: none;
   border: none;
   border-radius: 3px;
   border: 1px solid hsl(0, 0%, 0%);
+  
 
   &::placeholder {
     font-size: 16px;
@@ -72,13 +76,16 @@ p {
   &:hover {background-color:hsl(59,72%,95%);}
 }
 
-.pixabay{margin-bottom: 10px;}
+
+
+.pixabay{font-size: 8px;top:2px;
+  margin-bottom: 10px;position: fixed}
 
 .pixabayInfo{font-size: 12px;
 text-align: right;color: #777;}
 
 .pixabayLink {
-    font-size:14px;
+    font-size:12px;
     font-weight: 400;
     color: #777;
     ;
@@ -96,6 +103,8 @@ text-align: right;color: #777;}
   flex-wrap: wrap;
   margin: -10px;
   padding-top: 100px;
+  object-fit: scale-down;
+  
 }
 
 .searchBtn{
@@ -122,8 +131,9 @@ text-align: right;color: #777;}
   box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.5);
   border-radius: 3px;
   overflow: hidden;
+  position: static;
   // background-color: rgba(231, 231, 220, 0.5);
-background: linear-gradient(
+  background: linear-gradient(
     315deg,
     rgba(138, 179, 220, 0.7) 38%,
     rgba(48, 238, 226, 0.7) 68%,
@@ -133,7 +143,9 @@ background: linear-gradient(
   &:focus {
     box-shadow: 5px 5px 10px 2px rgba(0, 4, 56, 0.5);
     transition-duration: 500ms;
-    transform: scale(1.01)
+    
+    
+    
     
   }
 }
@@ -143,7 +155,10 @@ background: linear-gradient(
   width: 100%;
   object-fit: cover;
   overflow: hidden;
+  // &:hover,
+  // &:focus {overflow:hidden;z-index: 99;border: 1px solid red;}
 }
+
 
 .info {
   display: flex;
@@ -182,6 +197,7 @@ background: linear-gradient(
     background-color: rgb(164, 186, 186,1);;
   }
 
+  
   &.is-hidden {
     display: none;
   }

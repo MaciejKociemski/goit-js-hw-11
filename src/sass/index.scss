@@ -132,7 +132,7 @@ text-align: right;color: #777;}
   border-radius: 3px;
   overflow: hidden;
   position: static;
-  @media screen and (max-width:768px) {
+  @media screen and (max-width:720px) {
       width: auto;
       height: auto;
       padding: 0 16px;}
@@ -163,7 +163,7 @@ text-align: right;color: #777;}
   overflow: hidden;
   // &:hover,
   // &:focus {overflow:hidden;z-index: 99;border: 1px solid red;}
-@media screen and (max-width:768px) {
+@media screen and (max-width:720px) {
       width: auto;
       height: auto;
       // padding: 16px 16px;

@@ -15,6 +15,8 @@ let isShown = 0;
 const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
+
+// refs.searchForm.addEventListener('input', onInput);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 const options = {
@@ -33,12 +35,17 @@ function onSearch(e) {
 
   if (newsApiService.query === '') {
     Notify.warning('Please, fill the main field');
+    //I added the is-hidden class to the load-more reference
+    refs.loadMoreBtn.classList.add('is-hidden');
     return;
   }
 
   isShown = 0;
   fetchGallery();
   onRenderGallery(hits);
+
+  //
+  
 }
 
 function onLoadMore() {
@@ -114,3 +121,6 @@ function onRenderGallery(elements) {
   refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
+
+
+

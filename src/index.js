@@ -3,7 +3,7 @@ import NewsApiService from './js/api-service';
 import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
+//
 const settings = {
   apiUrl: 'https://pixabay.com/api/',
   apiKey: '34597328-b6c32e0b24abc6857736d8e3a',
@@ -12,6 +12,8 @@ const settings = {
   imageType: 'photo',
   orientation: 'horizontal',
 };
+//
+
 
 export default settings;
 
@@ -26,7 +28,6 @@ const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
 
-// refs.searchForm.addEventListener('input', onInput);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 const options = {
@@ -95,6 +96,7 @@ async function fetchGallery() {
   if (isShown >= total) {
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
+
 }
 
 function onRenderGallery(elements) {
@@ -145,9 +147,9 @@ function onRenderGallery(elements) {
   lightbox.refresh();
 
  
-    // const rowHeight = refs.galleryContainer.querySelector('.photo-card').offsetHeight;
-    // window.scrollBy(0, rowHeight);
+    
   }
 
 
-
+// const rowHeight = refs.galleryContainer.querySelector('.photo-card').offsetHeight;
+//     window.scrollBy(0, rowHeight);

@@ -31,6 +31,7 @@ export default class NewsApiService {
     } catch (error) {
       console.error(error);
     }
+    
   }
 
   incrementPage() {

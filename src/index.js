@@ -4,6 +4,16 @@ import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
+const settings = {
+  apiUrl: 'https://pixabay.com/api/',
+  apiKey: '34597328-b6c32e0b24abc6857736d8e3a',
+  perPage: 40,
+  safeSearch: true,
+  imageType: 'photo',
+  orientation: 'horizontal',
+};
+
+export default settings;
 
 
 const refs = {
@@ -24,6 +34,8 @@ const options = {
   root: null,
   threshold: 0.3,
 };
+
+
 const observer = new IntersectionObserver(onLoadMore, options);
 
 function onSearch(e) {
@@ -48,10 +60,12 @@ function onSearch(e) {
   
 }
 
+
+
 function onLoadMore() {
   newsApiService.incrementPage();
   fetchGallery();
-  galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  // galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 async function fetchGallery() {
@@ -75,6 +89,7 @@ async function fetchGallery() {
   if (isShown < total) {
     Notify.success(`Hooray! We found ${total} images !!!`);
     refs.loadMoreBtn.classList.remove('is-hidden');
+    
   }
 
   if (isShown >= total) {

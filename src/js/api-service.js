@@ -1,30 +1,31 @@
+
 import axios from 'axios';
+import settings from '../index.js';
 
 export default class NewsApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.PER_PAGE = 40;
+    this.settings = settings;
   }
+
   async fetchGallery() {
     const axiosOptions = {
       method: 'get',
-      url: 'https://pixabay.com/api/',
+      url: this.settings.apiUrl,
       params: {
-        key: '34597328-b6c32e0b24abc6857736d8e3a',
+        key: this.settings.apiKey,
         q: `${this.searchQuery}`,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
+        image_type: this.settings.imageType,
+        orientation: this.settings.orientation,
+        safesearch: this.settings.safeSearch,
         page: `${this.page}`,
-        per_page: `${this.PER_PAGE}`,
+        per_page: `${this.settings.perPage}`,
       },
     };
     try {
       const response = await axios(axiosOptions);
-
       const data = response.data;
-
       this.incrementPage();
       return data;
     } catch (error) {

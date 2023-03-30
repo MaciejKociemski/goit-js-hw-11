@@ -1,9 +1,9 @@
-import './sass/index.scss';
-import NewsApiService from './js/api-service';
-import { lightbox } from './js/lightbox';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import './sass/index.scss';//import sass
+import NewsApiService from './js/api-service';//import class NewsApiService from file api-service.js //support for API requests to Pixabay
+import { lightbox } from './js/lightbox';//import lightbox from file/js/lightbox.js//function is responsible for displaying enlarged images
+import { Notify } from 'notiflix/build/notiflix-notify-aio';//import Notify class from library Notiflix to display notifications
 
-//
+//settings for API Pixabay
 const settings = {
   apiUrl: 'https://pixabay.com/api/',
   apiKey: '34597328-b6c32e0b24abc6857736d8e3a',
@@ -17,28 +17,34 @@ const settings = {
 
 export default settings;
 
-
+//references to elements, for referring to those elements in the code.
 const refs = {
   searchForm: document.querySelector('.search-form'),
   galleryContainer: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.load-more'),
 };
+
+
+
+//defined variable isShown to track the number of images displayed
 let isShown = 0;
 const newsApiService = new NewsApiService();
-
 refs.searchForm.addEventListener('submit', onSearch);
-
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
+
+//defined object options 
 const options = {
   rootMargin: '50px',
   root: null,
   threshold: 0.3,
 };
 
-
+//interface API to monitor what is visible in the browser window
 const observer = new IntersectionObserver(onLoadMore, options);
 
+
+//defined function onSearch, 
 function onSearch(e) {
   e.preventDefault();
 
@@ -52,23 +58,23 @@ function onSearch(e) {
     refs.loadMoreBtn.classList.add('is-hidden');
     return;
   }
-//
+
   isShown = 0;
   fetchGallery();
   onRenderGallery(hits);
 
-  //
+
   
 }
 
 
-
+//function called after loadmore click. load next img from API Pixabay
 function onLoadMore() {
   newsApiService.incrementPage();
   fetchGallery();
   // galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
+//function sends a request to API Pixabay and rendering gallery
 async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
 
@@ -99,6 +105,8 @@ async function fetchGallery() {
 
 }
 
+
+//rendering photos usings templates HTML i Json form API  Pixabay
 function onRenderGallery(elements) {
 
   const galleryContainer = document.querySelector('.gallery');
@@ -144,12 +152,9 @@ function onRenderGallery(elements) {
     .join('');
   
   galleryContainer.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
+  lightbox.refresh(); 
 
- 
-    
+
+  
   }
 
-
-// const rowHeight = refs.galleryContainer.querySelector('.photo-card').offsetHeight;
-//     window.scrollBy(0, rowHeight);

@@ -3,6 +3,7 @@ import NewsApiService from './js/api-service';//import class NewsApiService from
 import { lightbox } from './js/lightbox';//import lightbox from file/js/lightbox.js//function is responsible for displaying enlarged images
 import { Notify } from 'notiflix/build/notiflix-notify-aio';//import Notify class from library Notiflix to display notifications
 
+
 //settings for API Pixabay
 const settings = {
   apiUrl: 'https://pixabay.com/api/',
@@ -10,11 +11,9 @@ const settings = {
   perPage: 40,
   safeSearch: true,
   imageType: 'photo',
-  orientation: 'horizontal',
+  orientation: ['horizontal','vertical']
 };
 //
-
-
 export default settings;
 
 //references to elements, for referring to those elements in the code.
@@ -24,8 +23,6 @@ const refs = {
   loadMoreBtn: document.querySelector('.load-more'),
 };
 
-
-
 //defined variable isShown to track the number of images displayed
 let isShown = 0;
 const newsApiService = new NewsApiService();
@@ -33,15 +30,18 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 
-//defined object options 
-const options = {
-  rootMargin: '50px',
-  root: null,
-  threshold: 0.3,
-};
 
-//interface API to monitor what is visible in the browser window
-const observer = new IntersectionObserver(onLoadMore, options);
+//defined object options 
+// const options = {
+//   rootMargin: '50px',
+//   root: null,
+//   threshold: 0.3,
+// };
+
+//interface API to monitor what is visible in the browser window, not used, maybe ToDo
+
+// const observer = new IntersectionObserver(onLoadMore, options);
+
 
 
 //defined function onSearch, 
@@ -54,7 +54,7 @@ function onSearch(e) {
 
   if (newsApiService.query === '') {
     Notify.warning('Please, fill the main field');
-    //I added the is-hidden class to the load-more reference
+    //added the is-hidden class to the load-more reference, button load-more is-hidden if input is empty && was deleted
     refs.loadMoreBtn.classList.add('is-hidden');
     return;
   }
@@ -62,16 +62,15 @@ function onSearch(e) {
   isShown = 0;
   fetchGallery();
   onRenderGallery(hits);
-
-
   
 }
-
 
 //function called after loadmore click. load next img from API Pixabay
 function onLoadMore() {
   newsApiService.incrementPage();
   fetchGallery();
+  
+
   // galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 //function sends a request to API Pixabay and rendering gallery
@@ -95,22 +94,20 @@ async function fetchGallery() {
 
   if (isShown < total) {
     Notify.success(`Hooray! We found ${total} images !!!`);
-    refs.loadMoreBtn.classList.remove('is-hidden');
+    refs.loadMoreBtn.classList.remove('is-hidden');  
     
   }
 
   if (isShown >= total) {
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
-
+  
 }
-
 
 //rendering photos usings templates HTML i Json form API  Pixabay
 function onRenderGallery(elements) {
 
   const galleryContainer = document.querySelector('.gallery');
-  // const loadMoreBtn = document.querySelector('.load-more');
   
 
   const markup = elements
@@ -153,8 +150,6 @@ function onRenderGallery(elements) {
   
   galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh(); 
-
-
   
   }
 

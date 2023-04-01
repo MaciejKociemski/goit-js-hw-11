@@ -30,20 +30,6 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 
-
-//defined object options 
-// const options = {
-//   rootMargin: '50px',
-//   root: null,
-//   threshold: 0.3,
-// };
-
-//interface API to monitor what is visible in the browser window, not used, maybe ToDo
-
-// const observer = new IntersectionObserver(onLoadMore, options);
-
-
-
 //defined function onSearch, 
 function onSearch(e) {
   e.preventDefault();
@@ -66,12 +52,10 @@ function onSearch(e) {
 }
 
 //function called after loadmore click. load next img from API Pixabay
-function onLoadMore() {
+async function onLoadMore() {
   newsApiService.incrementPage();
   fetchGallery();
   
-
-  // galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 //function sends a request to API Pixabay and rendering gallery
 async function fetchGallery() {
@@ -103,13 +87,11 @@ async function fetchGallery() {
   }
   
 }
-
-//rendering photos usings templates HTML i Json form API  Pixabay
+//rendering photos usings templates HTML i Json from API  Pixabay
 function onRenderGallery(elements) {
 
   const galleryContainer = document.querySelector('.gallery');
   
-
   const markup = elements
     .map(
       ({
@@ -150,6 +132,7 @@ function onRenderGallery(elements) {
   
   galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh(); 
+  
   
   }
 

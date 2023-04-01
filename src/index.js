@@ -27,7 +27,7 @@ const refs = {
 let isShown = 0;
 const newsApiService = new NewsApiService();
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+// refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 
 //defined function onSearch, 
@@ -52,11 +52,13 @@ function onSearch(e) {
 }
 
 //function called after loadmore click. load next img from API Pixabay
-async function onLoadMore() {
+function onLoadMore() {
   newsApiService.incrementPage();
   fetchGallery();
   
 }
+
+
 //function sends a request to API Pixabay and rendering gallery
 async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
@@ -136,3 +138,8 @@ function onRenderGallery(elements) {
   
   }
 
+window.addEventListener('scroll', () => {
+  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+    fetchGallery();
+  }
+});
